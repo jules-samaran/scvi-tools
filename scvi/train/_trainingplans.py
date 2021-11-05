@@ -366,6 +366,7 @@ class AdversarialTrainingPlan(TrainingPlan):
                 z = inference_outputs["z"]
                 fool_loss = self.loss_adversarial_classifier(z, batch_tensor, False)
                 loss += fool_loss * kappa
+                self.log("train_adv_loss", fool_loss, on_epoch=True)
 
             reconstruction_loss = scvi_loss.reconstruction_loss
             self.log("train_loss", loss, on_epoch=True)

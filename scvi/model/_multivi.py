@@ -185,6 +185,7 @@ class MULTIVI(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
         n_steps_kl_warmup: Optional[int] = None,
         n_epochs_kl_warmup: Optional[int] = 50,
         adversarial_mixing: bool = True,
+        scale_adversarial_loss: int =1,
         plan_kwargs: Optional[dict] = None,
         **kwargs,
     ):
@@ -246,7 +247,7 @@ class MULTIVI(VAEMixin, UnsupervisedTrainingMixin, BaseModelClass):
             early_stopping_monitor="reconstruction_loss_validation",
             early_stopping_patience=50,
             optimizer="AdamW",
-            scale_adversarial_loss=1,
+            scale_adversarial_loss=scale_adversarial_loss,
         )
         if plan_kwargs is not None:
             plan_kwargs.update(update_dict)
